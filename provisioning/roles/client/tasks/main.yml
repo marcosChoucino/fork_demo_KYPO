@@ -1,0 +1,39 @@
+---
+# This is a role for setting up the client.
+
+- name: Create alias for server
+  lineinfile:
+    path: '/etc/hosts'
+    line: '192.168.20.5 server'
+
+- name: Install packages
+  apt:
+    pkg:
+     - nmap
+     - medusa
+    update_cache: yes
+
+- name: Uninstall pre-installed hydra
+  apt:
+    name: hydra
+    state: absent
+
+- name: Clone hydra repository
+  git:
+    repo: 'https://github.com/vanhauser-thc/thc-hydra.git'
+    version: v9.1
+    dest: /tmp/thc-hydra
+
+- name: Build hydra from source
+  shell:
+    cmd: ./configure && make && make install
+    chdir: /tmp/thc-hydra
+
+- name: Add passwords file to the home directory
+  copy:
+    src: passlist.txt
+    dest: /home/user/passlist.txt
+    owner: user
+    mode: 0644
+
+...
