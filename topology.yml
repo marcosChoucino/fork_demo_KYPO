@@ -16,7 +16,7 @@ hosts:
 routers:
   - name: router
     base_box:
-      image: debian-9-x86_64
+      image: debian-12-x86_64 
       man_user: debian
     flavor: standard.small
 
