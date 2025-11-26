@@ -3,7 +3,7 @@ name: kypo-crp-demo-training-kali
 hosts:
   - name: server
     base_box: 
-      image: ubuntu-focal-x86_64
+      image: ubuntu-noble-x86_64
       man_user: ubuntu
     flavor: standard.small
 
